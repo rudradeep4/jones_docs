@@ -1,0 +1,74 @@
+---
+title: "settings.json"
+description: Reference page for settings.json.
+---
+
+```json title="settings.json"
+{
+  "kind": string,
+  "nInterval": number,
+  "fileExtension": string,
+  "trialsPerBlock": number,
+  "blocksPerXp": number,
+  "addRepeatBlock": boolean,
+  "allowCreate": boolean,
+  "createPassword": string,
+  "adminPassword": string,
+  "showProgress": boolean,
+  "collectInfo": list 
+}
+```
+
+import { Badge } from '@astrojs/starlight/components';
+
+## Fields
+
+### `kind`
+**type:** `string`, **values:** `'image' | 'sound' | 'video'`
+
+The kind of the stimuli to be presented. 
+
+### `nInterval`
+**type:** `number`, **values:** `1 | 2`
+
+Whether the experiment should be 1-interval or 2-interval.
+
+### `fileExtension`
+**type:** `string`
+
+File extension for the stimuli. Most image, sound and video file extensions should work but *this has not been tested exhaustively*. Preference should be for common types like `jpg`, `png`, `wav` and `mp4`.
+
+### `trialsPerBlock`
+**type:** `number`
+
+Number of trials in each block.
+
+### `blocksPerXp`
+**type:** `number`
+
+Number of blocks in the experiment.
+
+### `addRepeatBlock`
+**type:** `boolean`
+
+
+### `allowCreate`
+**type:** `boolean`
+
+
+### `createPassword`
+**type:** `string`
+
+Create a password for the participant to start the experiment.
+
+### `adminPassword`
+**type:** `string`
+
+### `showProgress` <Badge text="optional" variant="tip" size="small" />
+**type:** `boolean`
+
+If `true`, a progress indicator will show how many have been completed out of the total number of trials.
+
+### `collectInfo` <Badge text="optional" variant="tip" size="small" />
+**type:** `list`
+

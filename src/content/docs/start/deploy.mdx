@@ -1,0 +1,107 @@
+---
+title: Build & Deploy
+description: assets.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+
+<Steps>
+1. From the base directory, run the following command to build the `jones` binary
+    ```sh
+    go build
+    ```
+
+2. Build frontend assets (to the public folder) using the `jones` binary:
+    <Tabs>
+    <TabItem label="Command line argument">
+        ```sh
+        ./jones -APP_MODE BUILD_FRONT
+        ```
+    </TabItem>
+    <TabItem label="Environment variable">
+        ```sh
+        APP_MODE=BUILD_FRONT ./jones
+        ```
+    </TabItem>
+    </Tabs>
+
+3. Transfer the following folders to the server:
+
+      `jones` - jspsych WebSocket backend to manage experiments + HTTP server for frontend assets
+
+      `data` - contains live experiments data (configuration and results)
+
+      `public` - js/css assets served by HTTP server including those created with `APP_MODE=BUILD_FRONT`
+
+      `examples` - (optional) contains example experiment configurations that you may copy/paste then edit
+
+    The other folders were only required for the build process and do not need to be transferred to the server.
+
+    :::note
+    The `jones` binary will automatically create an additional `state` folder to manage internal state.
+    :::
+
+4. Run `jones` (with a user with write permissions on local folder and below), at least specifying from what origins WebSockets connections are allowed
+    ```sh
+    APP_ORIGINS=https://example.com ./jones
+    ```
+</Steps>
+
+## Environment Variables
+### `APP_PORT` 
+**default:** `8100`
+
+set the port listened to by the `jones` server
+
+### `APP_ORIGINS`
+**default:** `["http://localhost:8100", "https://localhost:8100"]`
+
+declare a comma separated list of allowed origins for WebSocket connections
+
+### `APP_WEB_PREFIX` 
+**default:** `""`
+
+needed if, depending on your server configuration, `jones` is served under a given path, for instance https://example.com/path
+
+### `APP_MODE` 
+- `DEV` : enable development mode (watch JS files to trigger builds, enhanced logs and allow http://localhost:8100 and https://localhost:8100 origins)
+- `BUILD_FRONT` : build frontend assets but do not start server
+
+
+## Proxy Setup
+You may prefer to serve `jones` behind a HTTP proxy, for instance proxying a given public sub/domain to the declared `APP_PORT` of the locally running `jones`.
+
+In that case you need to allow for WebSockets upgrade and to fine-tune the default WebSockets timeout (taking into consideration possible idle periods of participants) at the proxy side.
+
+For instance if you use nginx, you may consider the following directives:
+```sh
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection $connection_upgrade;
+# increase default timeout
+proxy_send_timeout 10m;
+proxy_read_timeout 10m;
+```
+
+## Process Control
+You may manage jones execution with [Supervisor](http://supervisord.org/) or [pm2](https://pm2.keymetrics.io/docs/usage/quick-start/) (for instance for auto-restarts). Here is a configuration example for Supervisor:
+```sh
+[program:jones]
+directory=/home/deploy/jones
+command=/home/deploy/jones/jones
+stdout_logfile=/home/deploy/jones/out.log
+stderr_logfile=/home/deploy/jones/err.log
+environment=APP_WEB_PREFIX=/jones,APP_ORIGINS=https://example.com
+user=deploy
+autostart=true
+autorestart=true
+```
+
+## Build Options
+Check available options if you are building for a different machine (see [here](https://golang.org/doc/install/source#environment)).
+
+For instance:
+```sh
+GOOS=linux GOARCH=amd64 go build
+```

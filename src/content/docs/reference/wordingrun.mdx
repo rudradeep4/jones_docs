@@ -1,0 +1,156 @@
+---
+title: "wording.run.json"
+description: overview.
+---
+
+```json title="wording.new.json"
+{
+  "title": string,
+  "collect": string,
+  "collectAge": string,
+  "collectSex": string,
+  "collectButton": string,
+  "introduction": string | list,
+  "pause": string,
+  "pauseOver": string,
+  "resume": string,
+  "end": string,
+  "thanks": string,
+  "closed": string,
+  "connectionError": string,
+  "play": string,
+  "next": string,
+  "space": string,
+  "question": string,
+  "keyAlt1": string,
+  "keyAlt2": string,
+  "labelAlt1": string,
+  "labelAlt2": string,
+  "codeAlt1": string,
+  "codeAlt2": string
+}
+```
+
+import { Badge } from '@astrojs/starlight/components';
+
+## Fields
+
+### `title`
+**type:** `string`
+
+Title of the experiment
+
+### `collect`
+**type:** `string`
+
+The text to show participants asking them to fill in the form of demographic information.
+
+### `collectAge` <Badge text="optional" variant="tip" size="small" />
+**type:** `string`
+
+Label for the age field in the form.
+
+### `collectSex` <Badge text="optional" variant="tip" size="small" />
+**type:** `string`
+
+Label for the sex field in the form.
+
+### `collectButton`
+**type:** `string`
+
+Label for the button to submit the form.
+
+### `introduction`
+**type:** `string | list`
+
+The instructions for how to do the experiment. If you would like the instructions to be spread out over several pages, put them in a list.
+
+### `pause`
+**type:** `string`
+
+Text to show participant when there is a break in the experiment.
+
+### `pauseOver`
+**type:** `string`
+
+Text to show participant when there once the break is over.
+
+### `resume`
+**type:** `string`
+
+If there is an interruption in the experiment, show this text upon the participant's return.
+
+### `end`
+**type:** `string`
+
+Text to show at the end of the experiment.
+
+### `thanks`
+**type:** `string`
+
+Additional text to show the participant upon completion of the expriment (e.g. - the Prolific URL/completion code).
+
+### `closed`
+**type:** `string`
+
+Text to show if a participant who has already completed the experiment tries again.
+
+### `connectionError`
+**type:** `string`
+
+Text to show if there is an issue with the connection being lost.
+
+### `play` <Badge text="optional" variant="tip" size="small" />
+**type:** `string`
+
+Label informing the participant which button to press to play the video.
+
+### `playSounds` <Badge text="optional" variant="tip" size="small" />
+**type:** `string`
+
+Label informing the participant which button to press to play the audio.
+
+### `next`
+**type:** `string`
+
+Label for proceeding to next trial or screen.
+
+### `space`
+**type:** `string`
+
+Text to indicate which button to press to play the video (e.g. - 'space').
+
+### `question`
+**type:** `string`
+
+Prompt for the task.
+
+### `keyAlt1`
+**type:** `string`
+
+The keyboard key, as a string, the participant needs to press to indicate a response.
+
+### `keyAlt2`
+**type:** `string`
+
+The keyboard key, as a string, the participant needs to press to indicate a response.
+
+### `labelAlt1`
+**type:** `string`
+
+Text to indicate what the `keyAlt1` key press signifies.
+
+### `labelAlt2`
+**type:** `string`
+
+Text to indicate what the `keyAlt2` key press signifies.
+
+### `codeAlt1`
+**type:** `string`
+
+The string with which you want to encode the `keyAlt1` button press. (*This is what will be recorded in the csv in your results*)
+
+### `codeAlt2`
+**type:** `string`
+
+The string with which you want to encode the `keyAlt2` button press. (*This is what will be recorded in the csv in your results*)

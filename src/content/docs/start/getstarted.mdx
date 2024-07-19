@@ -1,0 +1,45 @@
+---
+title: Getting started
+description: Start using JONES.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+1. Make sure you have Go installed on your machine. You can download a suitable binary from here: https://go.dev/dl/
+
+2. Clone the git repository:
+    ```sh
+    git clone https://github.com/neuro-team-femto/jones.git
+    ```
+
+3. In the `jones` directory, you should have the directory `examples` containing several small test experiments to run and use as a guide to create your own.
+    <FileTree>
+    - config/
+    - **examples/**
+      - image_int1/
+      - image_int2/
+      - ...
+    - front/
+    - helpers/
+    - public/
+    - server/
+    - xp/
+    - dockerfile
+    - go.mod
+    - go.sum
+    - main.go
+    </FileTree>
+
+    Create a folder called `data` in the root directory and copy one of the folders in `examples` into it.
+
+4. From the root directory run the following commands to start in development mode:
+    ```sh
+    go run main.go -APP_MODE DEV
+    # or with an environment variable
+    APP_MODE=DEV go run main.go
+    ```
+
+5. The experiment should now be running on http://localhost:8100/xp/image_int1/new
+</Steps>

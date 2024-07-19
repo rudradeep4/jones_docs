@@ -1,0 +1,35 @@
+---
+title: JONES
+description: Documentation site for JONES.
+tableOfContents: false
+template: splash
+hero:
+  tagline: A backend for jsPsych reverse correlation experiments comparing pairs of sounds or images generated with CLEESE.
+  actions:
+    - text: Get started
+      link: /start/getstarted/
+      icon: right-arrow
+      variant: primary
+    - text: Read more about CLEESE
+      link: https://neuro-team-femto.github.io/cleese/
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Features
+
+<CardGrid>
+	<Card title="Easy experiment creation" icon="pencil">
+		Enables the creation of new experiments through just a few configuration files
+	</Card>
+	<Card title="jsPsych + Go" icon="laptop">
+		jsPsych (frontend) interacts with the server thanks to WebSockets (leveraging [Go](https://go.dev/) and [Gorilla](https://gorilla.github.io/))
+	</Card>
+	<Card title="No databases" icon="document">
+		All configuration and state is saved to text files and the `jones` binary comes with an HTTP server for static files (JS, CSS)
+	</Card>
+	<Card title="Simple deployment" icon="setting">
+		Just build the project and transfer the binary (along with a few folders) to the server
+	</Card>
+</CardGrid>

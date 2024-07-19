@@ -1,0 +1,123 @@
+---
+title: Creating an experiment
+description: Guide to make a new experiment.
+---
+
+import { Steps, FileTree } from '@astrojs/starlight/components';
+
+With `jones`, creating an experiment is as simple as putting your stimuli in a folder and tweaking the parameters in a few configuration files.
+
+In this guide, we will detail the steps involved in creating a new experiment excitingly named `my_experiment`.
+
+<Steps>
+
+1. Create a directory called `my_experiment` in `data` with the follwing sub-directories in it:
+
+    `assets/`
+
+    `config/`
+
+    `results/`
+
+2. [Download](../../dataset.zip) the sample dataset and transfer to the `assets` folder.
+
+3.  <div>
+    Each stimulus file should have an accompanying text file with the same name (if the stimulus is `trial_1.png`, there should also be a `trial_1.txt`). The text file should contain the information about the stimulus that you want recorded in the results.
+    
+    For example: 
+
+    ```txt title="trial_1.txt"
+    id,condition,correct_response
+    trial_1,face,yes
+    ```
+
+    :::note
+    There should be no whitespace between the fields.
+    :::
+
+    </div>
+
+4.  <div>
+    In `config`, create a file called `settings.json` with the following fields:
+
+    ```json title="settings.json"
+    {
+        "kind": "image",
+        "nInterval": 1,
+        "fileExtension": "png",
+        "trialsPerBlock": 3,
+        "blocksPerXp": 2,
+        "addRepeatBlock": false,
+        "allowCreate": true,
+        "createPassword": "consent",
+        "adminPassword": "temporary_to_change",
+    }
+    ```
+    </div>
+
+    **Reference: [settings.json](/reference/settings/)**
+
+5. <div>
+    Next, we will create a file called `wording.new.json` (in `config`) with the following fields:
+
+    ```json title="wording.new.json"
+    {
+        "instructions": "Before starting the experiment, please fill in the follwing details:",
+        "idLabel": "ParticipantID",
+        "passwordLabel": "Password",
+        "submitLabel": "Submit",
+        "serverError": "Server error",
+        "wrongPassword": "Incorrect password. Please contact the organizer of this study.",
+        "invalidId": "Invalid Participant ID"
+    }
+    ```
+    </div>
+
+    These fields essentially define the text to display in the form that the participants need to submit before starting the experiment.
+    
+    **Reference: [wording.new.json](/reference/wordingnew/)**
+
+6. <div>
+    Finally, we create a file called `wording.run.json` in which we declare the text to show in various situations during the experiment:
+
+    ```json title="wording.run.json"
+    {
+        "title": "Faces vs. Houses",
+        "collect": "Please enter the follwing information:",
+        "collectButton": "Submit",
+        "introduction": "If you see a face, press 'f' on your keyboard. But if you see a house, press 'h'.",
+        "pause": "This is a break.",
+        "pauseOver": "The break is over. You may resume the experiment.",
+        "resume": "Resume the experiment",
+        "end": "End the the experiment",
+        "thanks": "Thank you for participating.",
+        "closed": "The experiment has already been completed by this participant.",
+        "connectionError": "Connection lost; please refresh the page.",
+        "next": "to continue",
+        "space": "space",
+        "question": "Did you see a face in the image?",
+        "keyAlt1": "f",
+        "keyAlt2": "h",
+        "labelAlt1": "Yes",
+        "labelAlt2": "No",
+        "codeAlt1": "yes",
+        "codeAlt2": "no"
+    }
+    ```
+    </div>
+    
+    **Reference: [wording.run.json](/reference/wordingrun/)**
+
+7.  <div>
+    Run the experiment locally for testing:
+
+    ```sh
+    go run main.go -APP_MODE DEV
+    ```
+
+    It should be available on http://localhost:8100/xp/my_experiment/new
+    </div>
+
+8. When ready, the experiment can be built and deployed by following the steps outlined [here](/deploy)
+
+</Steps>

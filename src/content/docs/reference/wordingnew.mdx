@@ -1,0 +1,53 @@
+---
+title: "wording.new.json"
+description: Reference for wording.new.json
+---
+
+```json title="wording.new.json"
+{
+  "instructions": string,
+  "idLabel": string,
+  "passwordLabel": string,
+  "submitLabel": string,
+  "serverError": string,
+  "wrongPassword": string,
+  "invalidId": string
+}
+```
+
+## Fields
+
+### `instructions`
+**type:** `string`
+
+Instructions for the participant before filling in demographic information. *This field is not for instructions about how to do the experiment.*
+
+### `idLabel`
+**type:** `string`
+
+The name of the field for the Participant ID. (e.g. - ProlificID, if the experiment if being run on Prolific)
+
+### `passwordLabel`
+**type:** `string`
+
+The password for the participant to enter in order to begin the experiment.
+
+### `submitLabel`
+**type:** `string`
+
+Label for the button to submit the form.
+
+### `serverError`
+**type:** `string`
+
+The message to show if there is an issue with the server.
+
+### `wrongPassword`
+**type:** `string`
+
+The message to show if the participant enters the incorrect password.
+
+### `invalidId`
+**type:** `boolean`
+
+The message to show if the participant enters an invalid ID.
