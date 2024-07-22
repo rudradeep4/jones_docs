@@ -5,6 +5,7 @@ description: Start using JONES.
 
 import { FileTree } from '@astrojs/starlight/components';
 import { Steps } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Steps>
 1. Make sure you have Go installed on your machine. You can download a suitable binary from here: https://go.dev/dl/
@@ -35,11 +36,18 @@ import { Steps } from '@astrojs/starlight/components';
     Create a folder called `data` in the root directory and copy one of the folders in `examples` into it.
 
 4. From the root directory run the following commands to start in development mode:
-    ```sh
-    go run main.go -APP_MODE DEV
-    # or with an environment variable
-    APP_MODE=DEV go run main.go
-    ```
+    <Tabs>
+    <TabItem label="Command line argument">
+        ```sh
+        go run main.go -APP_MODE DEV
+        ```
+    </TabItem>
+    <TabItem label="Environment variable">
+        ```sh
+        APP_MODE=DEV go run main.go
+        ```
+    </TabItem>
+    </Tabs>
 
 5. The experiment should now be running on http://localhost:8100/xp/image_int1/new
 </Steps>
